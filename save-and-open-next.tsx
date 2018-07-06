@@ -45,8 +45,7 @@ const filterNotValidFiles = (files: File[]) => {
 const openNext = (file: File) => {
     const allFiles = file
         .parent
-        .getFiles()
-        .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+        .getFiles();
 
     const images = filterNotValidFiles(allFiles);
 
@@ -64,13 +63,17 @@ const save = (file: File) => {
     const saveOptions = new JPEGSaveOptions();
     saveOptions.quality = 8;
 
-    $.write(desiredPath + "/" + desiredName);
-
     app.activeDocument.saveAs(new File(desiredPath + "/" + desiredName), saveOptions);
     app.activeDocument.close();
 }
 
 const current = app.activeDocument.fullName;
 
+const t1 = new Date().getTime();
+// $.writeln(t1);
 save(current);
+const t2 = new Date().getTime();
+$.writeln(t2 -t1);
 openNext(current);
+const t3 = new Date().getTime();
+$.writeln(t3 -t2);

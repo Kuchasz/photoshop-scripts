@@ -34,8 +34,8 @@ var filterNotValidFiles = function (files) {
 var openNext = function (file) {
     var allFiles = file
         .parent
-        .getFiles()
-        .sort(function (a, b) { return a.name.toLowerCase().localeCompare(b.name.toLowerCase()); });
+        .getFiles();
+    // .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
     var images = filterNotValidFiles(allFiles);
     var index = findIndexOfFile(images, file);
     if (index < images.length - 1)
@@ -48,10 +48,15 @@ var save = function (file) {
     var desiredPath = file.parent;
     var saveOptions = new JPEGSaveOptions();
     saveOptions.quality = 8;
-    $.write(desiredPath + "/" + desiredName);
     app.activeDocument.saveAs(new File(desiredPath + "/" + desiredName), saveOptions);
     app.activeDocument.close();
 };
 var current = app.activeDocument.fullName;
+var t1 = new Date().getTime();
+// $.writeln(t1);
 save(current);
+var t2 = new Date().getTime();
+$.writeln(t2 - t1);
 openNext(current);
+var t3 = new Date().getTime();
+$.writeln(t3 - t2);
