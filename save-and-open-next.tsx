@@ -69,11 +69,5 @@ const save = (file: File) => {
 
 const current = app.activeDocument.fullName;
 
-const t1 = new Date().getTime();
-// $.writeln(t1);
 save(current);
-const t2 = new Date().getTime();
-$.writeln(t2 -t1);
 openNext(current);
-const t3 = new Date().getTime();
-$.writeln(t3 -t2);
