@@ -32,9 +32,7 @@ var filterNotValidFiles = function (files) {
     return output;
 };
 var openNext = function (file) {
-    var allFiles = file
-        .parent
-        .getFiles();
+    var allFiles = file.parent.getFiles();
     var images = filterNotValidFiles(allFiles);
     var index = findIndexOfFile(images, file);
     if (index < images.length - 1)
@@ -46,7 +44,7 @@ var save = function (file) {
     var desiredName = getDesiredName(file);
     var desiredPath = file.parent;
     var saveOptions = new JPEGSaveOptions();
-    saveOptions.quality = 8;
+    saveOptions.quality = 12;
     app.activeDocument.saveAs(new File(desiredPath + "/" + desiredName), saveOptions);
     app.activeDocument.close();
 };
